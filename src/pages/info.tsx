@@ -1,14 +1,14 @@
 import { NextPage } from 'next';
-import useSWR from 'swr';
-import { fetcher } from '../utils/fetcher';
-import { API_ENDPOINT } from '../constants';
 import { useApiData } from '../hooks';
+import { Error, Loading } from '../components/common';
 
 const InfoPage: NextPage = () => {
   const name = 'info';
   const { data, error } = useApiData(name);
-  if (!data) return (<div>Loading...</div>)
-  if (error) return (<div>We have error...</div>)
+  
+  if (!data) return <Loading />;
+  if (error) return <Error />;
+
   return <div>InfoPage</div>;
 };
 
