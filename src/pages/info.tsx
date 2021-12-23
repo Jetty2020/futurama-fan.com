@@ -1,14 +1,12 @@
 import { NextPage } from 'next';
-import axios from 'axios';
 import useSWR from 'swr';
-
-export const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+import { fetcher } from '../utils/fetcher';
+import { API_ENDPOINT } from '../constants';
+import { useApiData } from '../hooks';
 
 const InfoPage: NextPage = () => {
-  const { data, error } = useSWR(
-    `https://api.sampleapis.com/futurama/info`,
-    fetcher
-  );
+  const name = 'info';
+  const { data, error } = useApiData(name);
   if (!data) return (<div>Loading...</div>)
   if (error) return (<div>We have error...</div>)
   return <div>InfoPage</div>;
