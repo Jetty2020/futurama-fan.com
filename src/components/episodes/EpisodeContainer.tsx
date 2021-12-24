@@ -4,13 +4,17 @@ import { EpisodeData } from '../../types';
 interface EpisodeContainerProps {
   episodeData: EpisodeData[];
   rowCount: number;
+  pageProps: string | string[] | undefined;
 }
 
 export const EpisodeContainer = ({
   episodeData,
   rowCount,
+  pageProps,
 }: EpisodeContainerProps) => {
-  const [page, setPage] = useState(0);
+  let initialPage = 0;
+  if (pageProps) initialPage = +pageProps;
+  const [page, setPage] = useState(initialPage);
   const handlePageUp = useCallback(() => {
     setPage((curr) => curr + 1);
     window.scrollTo(0, 0);

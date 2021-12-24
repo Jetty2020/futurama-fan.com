@@ -1,1 +1,1 @@
-export * from './episodeContainer';
+export * from './EpisodeContainer';
