@@ -1,25 +1,7 @@
 import { NextPage } from 'next';
 import { Error, Loading } from '../../components/common';
 import { useApiData } from '../../hooks';
-
-interface CHARACTER {
-  id: number;
-  age: string;
-  name: {
-    first: string;
-    middle: string;
-    last: string;
-  };
-  images: {
-    'head-shot': string;
-    main: string;
-  };
-  gender: string;
-  species: string;
-  homePlanet: string;
-  occupation: string;
-  sayings: string[];
-}
+import { CharacterData } from '../../types';
 
 const CharactersPage: NextPage = () => {
   const path = 'characters';
@@ -30,7 +12,7 @@ const CharactersPage: NextPage = () => {
   return (
     <div>
       <ul>
-        {data.map((character: CHARACTER) => {
+        {data.map((character: CharacterData) => {
           const {
             id,
             name,
