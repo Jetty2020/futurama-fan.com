@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useApiData } from '../hooks';
-import { Error, Loading } from '../components/common';
+import { useApiData } from '../../hooks';
+import { Error, Loading } from '../../components/common';
 
 interface CREATOR {
   name: string;

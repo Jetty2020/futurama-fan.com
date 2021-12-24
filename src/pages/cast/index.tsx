@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { Error, Loading } from '../../components/common';
 import { useApiData } from '../../hooks';
-import { CastType } from '../../types/Cast';
+import { CastType } from '../../types';
 
 const CastPage: NextPage = () => {
   const path = 'cast';
