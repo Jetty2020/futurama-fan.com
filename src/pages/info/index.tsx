@@ -10,19 +10,17 @@ interface CREATOR {
 
 const InfoPage: NextPage = () => {
   const name = 'info';
-  const { data, error } = useApiData(name);
+  const { data, error } = useApiData(name, '1');
 
   if (!data) return <Loading />;
   if (error) return <Error />;
-  
-  const innerData = data[0];
-  
+
   return (
     <div>
-      <p>{innerData.synopsis}</p>
-      <p>{innerData.yearsAired}</p>
+      <p>{data.synopsis}</p>
+      <p>{data.yearsAired}</p>
       <ul>
-        {innerData.creators?.map((creator: CREATOR, index: string) => {
+        {data.creators?.map((creator: CREATOR, index: string) => {
           return (
             <li key={index}>
               <Link href={creator.url}>
