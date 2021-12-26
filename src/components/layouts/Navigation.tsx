@@ -32,7 +32,12 @@ export const Navigation = () => {
             return (
               <MainLink key={routeObject.LABEL}>
                 <Link href={routeObject.PATH}>
-                  <a>{routeObject.LABEL}</a>
+                  <InnerLink>
+                    {routeObject.LABEL}{' '}
+                    {!!routeObject.SUBS.length && (
+                      <DropDownCon><Image src="/drop-down.svg" alt="서브메뉴 표시" width={15} height={15}></Image></DropDownCon>
+                    )}
+                  </InnerLink>
                 </Link>
                 {!!routeObject.SUBS.length && (
                   <Sub>
@@ -93,12 +98,22 @@ const MainLink = styled.li`
   @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
     padding-bottom: 20px;
     &:hover {
-      color: #808080;
+      /* color: #808080; */
+      opacity: 0.5;
     }
     &:hover ul {
       display: block;
     }
   }
+`;
+const InnerLink = styled.a`
+  display: flex;
+  white-space: nowrap;
+`;
+const DropDownCon = styled.span`
+  display: block;
+  width: 20px;
+  margin: 2px 0 0 2px;
 `;
 const Sub = styled.ul`
   display: none;
