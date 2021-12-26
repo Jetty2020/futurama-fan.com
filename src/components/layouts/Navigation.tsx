@@ -20,7 +20,11 @@ export const Navigation = () => {
   return (
     <Header>
       <h1>
-        <Link href="/"><a><Image src="/logo.png" alt="logo" width={170} height={30} /></a></Link>
+        <Link href="/">
+          <a>
+            <Image src="/logo.png" alt="logo" width={170} height={30} />
+          </a>
+        </Link>
       </h1>
       <Nav>
         <NavList>
@@ -55,32 +59,39 @@ export const Navigation = () => {
 };
 
 const Header = styled.header`
-  display: flex;
-  align-items: center;
+  display: block;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  height: 70px;
-  padding: 0 30px;
+  padding: 20px 40px;
   background: #eee;
+  @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
+    display: flex;
+    height: 70px;
+  }
 `;
 
 const Nav = styled.nav`
-  margin-left: 40px;
   font-weight: 500;
+  padding-top: 5px;
+  margin-left: 4px;
+  @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
+    padding-top: 0px;
+    margin-left: 40px;
+  }
 `;
 const NavList = styled.ul`
   display: flex;
 `;
 const MainLink = styled.li`
   position: relative;
-  margin-top: 30px;
-  padding-bottom: 20px;
+  margin-top: 10px;
   &:not(:first-child) {
     margin-left: 15px;
   }
   @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
+    padding-bottom: 20px;
     &:hover {
       color: #808080;
     }
