@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EpisodeData } from '../../types';
 
 interface EpisodeContainerProps {
@@ -13,8 +13,14 @@ export const EpisodeContainer = ({
   pageProps,
 }: EpisodeContainerProps) => {
   let initialPage = 0;
-  if (pageProps) initialPage = +pageProps;
+  
   const [page, setPage] = useState(initialPage);
+  
+  useEffect(() => {
+    if (pageProps) setPage(+pageProps - 1);
+    else setPage(0);
+  }, [pageProps]);
+
   const handlePageUp = useCallback(() => {
     setPage((curr) => curr + 1);
     window.scrollTo(0, 0);
