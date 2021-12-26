@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Error, Loading } from '../../components/common';
 import { EpisodeContainer } from '../../components/episodes';
 import { useApiData } from '../../hooks';
@@ -13,6 +14,7 @@ const EpisodesPage: NextPage = () => {
 
   if (!data) return <Loading />;
   if (error) return <Error />;
+
   return (
     <div>
       <EpisodeContainer episodeData={data} rowCount={rowCount} pageProps={page} />
