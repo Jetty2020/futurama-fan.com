@@ -13,12 +13,10 @@ export const Layout: React.FC = ({ children }) => {
 };
 
 const Container = styled.main`
-  margin: 103px auto 0;
-  @media (min-width: ${MEDIA_QUERY_END_POINT.MOBILE}) {
-    width: calc(100vw - 100px);
-  }
+  margin: 70px auto 0;
+  width: calc(100vw - 100px);
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
-    margin: 70px auto 0;
+    margin: 108px auto 0;
     width: 90vw;
   }
   @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
