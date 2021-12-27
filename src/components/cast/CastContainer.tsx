@@ -29,7 +29,7 @@ const CardList = styled.ul`
   gap: 20px;
   place-items: center;
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 20px 0;
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;

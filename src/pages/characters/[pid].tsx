@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { CharacterDetail } from '../../components/characters';
+import { PageTitle } from '../../components/common';
 import { SubNavigation } from '../../components/layouts/SubNavigation';
 import { ROUTES } from '../../constants';
 
@@ -10,6 +11,7 @@ const CharacterDetailPage: NextPage = () => {
   return (
     <div>
       <SubNavigation path={path} navData={navData} backBtn />
+      <PageTitle title={'Character Detail'} />
       <CharacterDetail />
     </div>
   );

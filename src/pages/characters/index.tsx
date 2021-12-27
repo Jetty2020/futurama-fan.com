@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { CharacterCardContainer } from '../../components/characters';
+import { PageTitle } from '../../components/common';
 import { SubNavigation } from '../../components/layouts/SubNavigation';
 import { ROUTES } from '../../constants';
 
@@ -9,6 +10,7 @@ const CharactersPage: NextPage = () => {
   return (
     <div>
       <SubNavigation path={path} navData={navData} />
+      <PageTitle title={'All Characters'} />
       <CharacterCardContainer />
     </div>
   );

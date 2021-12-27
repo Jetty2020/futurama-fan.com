@@ -18,7 +18,7 @@ export const CharacterDetail = () => {
   return (
     <Container>
       <NameBox>
-        {name.first} {name.middle} {name.last}
+        - {name.first} {name.middle} {name.last}
       </NameBox>
       <ImgBox>
         <Avartar src={images.main} alt="" />

@@ -29,7 +29,7 @@ const CardCon = styled.ul`
   grid-template-rows: auto;
   gap: 24px 12px;
   place-items: center;
-  margin: 60px auto;
+  margin: 30px auto 60px;
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
     grid-template-columns: repeat(2, 1fr);
     gap: 50px 20px;
