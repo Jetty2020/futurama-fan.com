@@ -1,9 +1,10 @@
+import styled from '@emotion/styled';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Error, Loading } from '../../components/common';
 import { SubNavigation } from '../../components/layouts/SubNavigation';
-import { ROUTES } from '../../constants';
+import { MEDIA_QUERY_END_POINT, ROUTES } from '../../constants';
 import { useApiData } from '../../hooks';
 
 const CharacterDetailPage: NextPage = () => {
@@ -20,8 +21,7 @@ const CharacterDetailPage: NextPage = () => {
     data;
   return (
     <div>
-      <SubNavigation path={path} navData={navData} />
-      <Link href={`/${path}`}><a>전체보기</a></Link>
+      <SubNavigation path={path} navData={navData} backBtn />
       <p>
         {name.first}
         {name.middle}

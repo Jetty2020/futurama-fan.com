@@ -26,7 +26,6 @@ const CharactersPage: NextPage = () => {
             species,
             homePlanet,
             occupation,
-            sayings,
           } = character;
           return (
             <li key={`${name.first}-character-${id}`}>
