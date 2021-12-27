@@ -10,7 +10,7 @@ export const CharacterCard = ({
   const path = 'characters';
   const { id, name, images, gender, species, homePlanet, occupation } =
     characterData;
-  console.log(characterData);
+
   return (
     <Container>
       <Link href={`/${path}/${id}`} passHref>
@@ -22,10 +22,10 @@ export const CharacterCard = ({
             <AvatarImg src={images.main} alt="" />
           </ImgCon>
           <InfoBox>
-            {gender && <InfoContent>{gender}</InfoContent>}
-            {species && <InfoContent>{species}</InfoContent>}
-            {homePlanet && <InfoContent>{homePlanet}</InfoContent>}
-            {occupation && <InfoContent>{occupation}</InfoContent>}
+            {gender && <GenderContent>{gender}</GenderContent>}
+            {species && <SpeciesContent>{species}</SpeciesContent>}
+            {homePlanet && <HPContent>{homePlanet}</HPContent>}
+            {occupation && <OccuContent>{occupation}</OccuContent>}
           </InfoBox>
           <More>More Info</More>
         </InfoLink>
@@ -34,8 +34,12 @@ export const CharacterCard = ({
   );
 };
 const Container = styled.li`
+  width: 100%;
+  max-width: 360px;
+  height: 100%;
   border: 6px solid #eee;
   border-radius: 20px;
+  background: #fff;
   overflow: hidden;
   z-index: 0;
 `;
@@ -44,7 +48,7 @@ const InfoLink = styled.a`
   flex-direction: column;
   justify-content: center;
   position: relative;
-  /* min-height: 480px; */
+  height: 100%;
   padding: 20px;
   cursor: pointer;
 `;
@@ -52,15 +56,15 @@ const CharacterName = styled.h3`
   position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
 `;
 const ImgCon = styled.div`
   display: flex;
   align-items: center;
   min-height: 320px;
-  margin: 40px auto 20px;
-  border: 2px solid #AAC1D0;
+  margin: 50px auto 20px;
+  border: 2px solid #aac1d0;
   border-radius: 5px;
   background: #eee;
 `;
@@ -72,7 +76,7 @@ const InfoBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
 const InfoContent = styled.span`
   display: block;
@@ -81,14 +85,27 @@ const InfoContent = styled.span`
   border-radius: 30px;
   background: #eee;
   text-align: center;
+  border: 3px solid #eee;
+`;
+const GenderContent = styled(InfoContent)`
+  border-color: #993393;
+`;
+const SpeciesContent = styled(InfoContent)`
+  border-color: #345f65;
+`;
+const HPContent = styled(InfoContent)`
+  border-color: #f56f5d;
+`;
+const OccuContent = styled(InfoContent)`
+  border-color: #6ebc46;
 `;
 const More = styled.span`
   display: block;
   position: absolute;
   right: 10px;
-  bottom: 5px;
+  bottom: 10px;
   padding: 8px 15px;
   border-radius: 10px;
   color: #fff;
-  background: #F38121;
+  background: #f38121;
 `;

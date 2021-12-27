@@ -1,10 +1,8 @@
-import styled from '@emotion/styled';
 import { NextPage } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Error, Loading } from '../../components/common';
 import { SubNavigation } from '../../components/layouts/SubNavigation';
-import { MEDIA_QUERY_END_POINT, ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
 import { useApiData } from '../../hooks';
 
 const CharacterDetailPage: NextPage = () => {
