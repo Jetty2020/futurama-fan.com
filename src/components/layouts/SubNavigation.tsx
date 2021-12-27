@@ -12,15 +12,14 @@ export const SubNavigation = ({
   navData: InnerSubs[] | undefined;
   backBtn?: boolean;
 }) => {
-  console.log(backBtn);
   return (
     <Container>
       {backBtn && (
-        <BackLink>
+        <li>
           <Link href={`/${path}`} passHref>
-            <LinkArea>전체보기</LinkArea>
+            <BackLink>All</BackLink>
           </Link>
-        </BackLink>
+        </li>
       )}
       {navData?.map((subLink: InnerSubs) => {
         const { ID, PATH, LABEL } = subLink;
@@ -56,7 +55,24 @@ const Container = styled.ul`
     padding: 10px 10vw 15px;
   }
 `;
-const BackLink = styled.li`
+const LinkArea = styled.a`
+  display: block;
+  padding: 10px 0;
+  border-radius: 7px;
+  background: #fff;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 10;
+  @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
+    font-size: 16px;
+  }
+  @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
+    padding: 7px 0;
+  }
+`;
+const BackLink = styled(LinkArea)`
   position: relative;
   &:after {
     content: '';
@@ -67,21 +83,5 @@ const BackLink = styled.li`
     left: 0;
     border: 3px solid #fcdd70;
     border-radius: 7px;
-  }
-`;
-const LinkArea = styled.a`
-  display: block;
-  padding: 10px 0;
-  border-radius: 7px;
-  background: #fff;
-  font-size: 14px;
-  text-align: center;
-  box-sizing: border-box;
-  cursor: pointer;
-  @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
-    font-size: 16px;
-  }
-  @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
-    padding: 7px 0;
   }
 `;
