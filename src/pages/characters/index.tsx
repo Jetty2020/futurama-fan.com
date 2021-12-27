@@ -1,9 +1,10 @@
 import { NextPage } from 'next';
+import { CharacterCard } from '../../components/characters/CharacterCard';
 import { Error, Loading } from '../../components/common';
 import { SubNavigation } from '../../components/layouts/SubNavigation';
 import { ROUTES } from '../../constants';
 import { useApiData } from '../../hooks';
-import { CharacterData, InnerSubs } from '../../types';
+import { CharacterData } from '../../types';
 
 const CharactersPage: NextPage = () => {
   const path = 'characters';
@@ -17,31 +18,12 @@ const CharactersPage: NextPage = () => {
     <div>
       <SubNavigation path={path} navData={navData} />
       <ul>
-        {data.map((character: CharacterData) => {
-          const {
-            id,
-            name,
-            images,
-            gender,
-            species,
-            homePlanet,
-            occupation,
-          } = character;
-          return (
-            <li key={`${name.first}-character-${id}`}>
-              <p>
-                {name.first}
-                {name.middle}
-                {name.last}
-              </p>
-              <img src={images.main} alt="" />
-              <p>{gender}</p>
-              <p>{species}</p>
-              <p>{homePlanet}</p>
-              <p>{occupation}</p>
-            </li>
-          );
-        })}
+        {data.map((characterData: CharacterData) => (
+          <CharacterCard
+            key={`${characterData.name.first}-character-${characterData.id}`}
+            characterData={characterData}
+          />
+        ))}
       </ul>
     </div>
   );

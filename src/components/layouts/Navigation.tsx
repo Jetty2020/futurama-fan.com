@@ -114,6 +114,7 @@ const Header = styled.header`
   height: 70px;
   padding: 0 25px;
   background: #eee;
+  z-index: 1000;
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
     display: block;
     height: 108px;
@@ -158,7 +159,7 @@ const SideBar = styled.ul`
 `;
 const SideBarBtn = styled.button`
   position: absolute;
-  bottom: 35vh;
+  bottom: 30vh;
   left: -35px;
   height: 50px;
   width: 35px;
