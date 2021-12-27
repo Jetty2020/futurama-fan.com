@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Error, Loading } from '../../components/common';
+import { Error, Loading, PageTitle } from '../../components/common';
 import { EpisodeContainer } from '../../components/episodes';
 import { useApiData } from '../../hooks';
 
@@ -17,7 +17,8 @@ const EpisodesPage: NextPage = () => {
 
   return (
     <div>
-      <EpisodeContainer episodeData={data} rowCount={rowCount} pageProps={page} />
+      <PageTitle title="Episodes" />
+      <EpisodeContainer episodesData={data} rowCount={rowCount} pageProps={page} />
     </div>
   );
 };

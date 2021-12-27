@@ -1,26 +1,28 @@
+import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
 import { EpisodeData } from '../../types';
+import { Pagination } from '../layouts';
+import { EpisodeArticle } from './EpisodeArticle';
 
 interface EpisodeContainerProps {
-  episodeData: EpisodeData[];
+  episodesData: EpisodeData[];
   rowCount: number;
   pageProps: string | string[] | undefined;
 }
 
 export const EpisodeContainer = ({
-  episodeData,
+  episodesData,
   rowCount,
   pageProps,
 }: EpisodeContainerProps) => {
   let initialPage = 0;
-  
+
   const [page, setPage] = useState(initialPage);
-  
+
   useEffect(() => {
     if (pageProps) setPage(+pageProps - 1);
     else setPage(0);
   }, [pageProps]);
-
   const handlePageUp = useCallback(() => {
     setPage((curr) => curr + 1);
     window.scrollTo(0, 0);
@@ -31,21 +33,18 @@ export const EpisodeContainer = ({
   }, []);
   return (
     <div>
-      <ul>
-        {episodeData.map((episode: EpisodeData, index: number) => {
-          const { id, number, title, writers, originalAirDate, desc } = episode;
+      <ListCon>
+        {episodesData.map((episodeData: EpisodeData, index: number) => {
           if (index >= rowCount * page && index < rowCount * page + rowCount)
             return (
-              <li key={`${id}st-episode`}>
-                <em>{number}</em>
-                <h2>{title}</h2>
-                <strong>{writers}</strong>
-                <p>{originalAirDate}</p>
-                <p>{desc}</p>
-              </li>
+              <EpisodeArticle
+                key={`${episodeData.id}-episode`}
+                episodedata={episodeData}
+                index={index}
+              />
             );
         })}
-      </ul>
+      </ListCon>
       <button type="button" onClick={handlePageDown}>
         이전 페이지
       </button>
@@ -55,3 +54,7 @@ export const EpisodeContainer = ({
     </div>
   );
 };
+
+const ListCon = styled.ul`
+  margin: 30px 0;
+`;
