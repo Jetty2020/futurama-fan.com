@@ -16,10 +16,11 @@ const Container = styled.main`
   margin: 70px auto 0;
   width: calc(100vw - 100px);
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
-    margin: 108px auto 0;
-    width: 90vw;
+    margin-top: 108px;
+    width: 80vw;
   }
   @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
-    width: 80vw;
+    margin-top: 70px;
+    width: 70vw;
   }
 `;
