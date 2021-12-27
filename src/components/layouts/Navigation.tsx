@@ -38,25 +38,13 @@ export const Navigation = () => {
             return (
               <MainLink key={routeObject.LABEL}>
                 <Link href={routeObject.PATH} passHref>
-                  <InnerLink>
-                    {routeObject.LABEL}{' '}
-                    {!!routeObject.SUBS.length && (
-                      <DropDownCon>
-                        <Image
-                          src="/drop-down.svg"
-                          alt="서브메뉴 표시"
-                          width={15}
-                          height={15}
-                        ></Image>
-                      </DropDownCon>
-                    )}
-                  </InnerLink>
+                  <InnerLink>{routeObject.LABEL}</InnerLink>
                 </Link>
               </MainLink>
             );
           })}
           <SideBarBtn type="button" onClick={() => toggleMenu()}>
-            <MenuImg src="/menu.svg" alt="메뉴 버튼" />
+            <MenuImg src="/icons/menu.svg" alt="메뉴 버튼" />
             <span className="sr-only">메뉴 닫기 버튼</span>
           </SideBarBtn>
         </SideBar>
@@ -70,7 +58,7 @@ export const Navigation = () => {
                     {!!routeObject.SUBS.length && (
                       <DropDownCon>
                         <Image
-                          src="/drop-down.svg"
+                          src="/icons/drop-down.svg"
                           alt="서브메뉴 표시"
                           width={15}
                           height={15}
@@ -203,7 +191,8 @@ const InnerLink = styled.a`
   }
 `;
 const DropDownCon = styled.span`
-  @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
+  display: none;
+  @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
     display: block;
     width: 20px;
     margin: 2px -10px 0 1px;
