@@ -3,27 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MEDIA_QUERY_END_POINT, ROUTES } from '../../constants';
-
-interface INNERSUBS {
-  ID: number;
-  PATH: string;
-  LABEL: string;
-  ORDER: number;
-}
-interface ROUTE {
-  ID: number;
-  PATH: string;
-  LABEL: string;
-  SUBS: Array<INNERSUBS>;
-}
+import { InnerSubs, NavRoute } from '../../types';
 
 export const Navigation = () => {
   const width = 200;
   const [xPosition, setX] = useState(width);
-  const [dim, setDim] = useState(false);
 
   const toggleMenu = () => {
-    setDim((curr) => !curr);
     if (xPosition > 0) {
       setX(0);
     } else {
@@ -48,7 +34,7 @@ export const Navigation = () => {
             transform: `translatex(${xPosition}px)`,
           }}
         >
-          {ROUTES.map((routeObject: ROUTE) => {
+          {ROUTES.map((routeObject: NavRoute) => {
             return (
               <MainLink key={routeObject.LABEL}>
                 <Link href={routeObject.PATH} passHref>
@@ -75,7 +61,7 @@ export const Navigation = () => {
           </SideBarBtn>
         </SideBar>
         <NavList>
-          {ROUTES.map((routeObject: ROUTE) => {
+          {ROUTES.map((routeObject: NavRoute) => {
             return (
               <MainLink key={routeObject.LABEL}>
                 <Link href={routeObject.PATH} passHref>
@@ -95,7 +81,7 @@ export const Navigation = () => {
                 </Link>
                 {!!routeObject.SUBS.length && (
                   <Sub>
-                    {routeObject.SUBS.map((subRouteObject: INNERSUBS) => {
+                    {routeObject.SUBS.map((subRouteObject: InnerSubs) => {
                       return (
                         <SubLink key={subRouteObject.LABEL}>
                           <Link
