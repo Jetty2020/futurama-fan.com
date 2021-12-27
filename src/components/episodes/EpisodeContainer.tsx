@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EpisodeData } from '../../types';
 import { Pagination } from '../layouts';
 import { EpisodeArticle } from './EpisodeArticle';
@@ -23,14 +23,7 @@ export const EpisodeContainer = ({
     if (pageProps) setPage(+pageProps - 1);
     else setPage(0);
   }, [pageProps]);
-  const handlePageUp = useCallback(() => {
-    setPage((curr) => curr + 1);
-    window.scrollTo(0, 0);
-  }, []);
-  const handlePageDown = useCallback(() => {
-    setPage((curr) => curr - 1);
-    window.scrollTo(0, 0);
-  }, []);
+
   return (
     <div>
       <ListCon>
@@ -45,12 +38,11 @@ export const EpisodeContainer = ({
             );
         })}
       </ListCon>
-      <button type="button" onClick={handlePageDown}>
-        이전 페이지
-      </button>
-      <button type="button" onClick={handlePageUp}>
-        다음 페이지
-      </button>
+      <Pagination
+        currentPage={page}
+        setPage={setPage}
+        totalPage={Math.ceil(episodesData.length / rowCount)}
+      />
     </div>
   );
 };
