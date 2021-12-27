@@ -1,6 +1,9 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Error, Loading } from '../../components/common';
+import { SubNavigation } from '../../components/layouts/SubNavigation';
+import { ROUTES } from '../../constants';
 import { useApiData } from '../../hooks';
 
 const CharacterDetailPage: NextPage = () => {
@@ -8,13 +11,17 @@ const CharacterDetailPage: NextPage = () => {
   const { pid } = router.query;
   const path = 'characters';
   const { data, error } = useApiData(path, pid);
+  const navData = ROUTES.find((value) => value.LABEL === 'Characters')?.SUBS;
 
   if (!data) return <Loading />;
   if (error) return <Error />;
+
   const { id, name, images, gender, species, homePlanet, occupation, sayings } =
     data;
   return (
     <div>
+      <SubNavigation path={path} navData={navData} />
+      <Link href={`/${path}`}><a>전체보기</a></Link>
       <p>
         {name.first}
         {name.middle}
@@ -28,7 +35,7 @@ const CharacterDetailPage: NextPage = () => {
       <ul>
         {sayings.map((saying: string, index: number) => {
           return (
-            <li key={`${index}st-saying`}>
+            <li key={`${index}-${name.last}-saying`}>
               <p>{saying}</p>
             </li>
           );

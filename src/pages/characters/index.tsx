@@ -1,7 +1,9 @@
 import { NextPage } from 'next';
 import { Error, Loading } from '../../components/common';
+import { SubNavigation } from '../../components/layouts/SubNavigation';
+import { ROUTES } from '../../constants';
 import { useApiData } from '../../hooks';
-import { CharacterData } from '../../types';
+import { CharacterData, InnerSubs } from '../../types';
 
 const CharactersPage: NextPage = () => {
   const path = 'characters';
@@ -9,8 +11,11 @@ const CharactersPage: NextPage = () => {
   if (!data) return <Loading />;
   if (error) return <Error />;
 
+  const navData = ROUTES.find((value) => value.LABEL === 'Characters')?.SUBS;
+
   return (
     <div>
+      <SubNavigation path={path} navData={navData} />
       <ul>
         {data.map((character: CharacterData) => {
           const {
@@ -35,15 +40,6 @@ const CharactersPage: NextPage = () => {
               <p>{species}</p>
               <p>{homePlanet}</p>
               <p>{occupation}</p>
-              <ul>
-                {sayings.map((saying, index) => {
-                  return (
-                    <li key={`${index}st-saying`}>
-                      <p>{saying}</p>
-                    </li>
-                  );
-                })}
-              </ul>
             </li>
           );
         })}
