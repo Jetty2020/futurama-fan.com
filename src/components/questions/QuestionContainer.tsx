@@ -4,8 +4,7 @@ import { useApiData } from '../../hooks';
 import { QuestionType } from '../../types';
 import { Error, Loading } from '../common';
 import styled from '@emotion/styled';
-import { QuestionPagination } from './QuestionPagination';
-import { QuestionsResult } from './QuestionsResult';
+import { QuestionPagination, QuestionsResult } from '.';
 
 export const QuestionContainer = () => {
   const name = 'questions';
@@ -22,18 +21,7 @@ export const QuestionContainer = () => {
   };
   if (!data) return <Loading />;
   if (error) return <Error />;
-  let sum = 0;
-  if (page > 3 && data.length) setDisPlayAnswer(() => true);
-  radio.map((arr, arrIndex) => {
-    arr.map((val: number, valIndex: number) => {
-      if (
-        data[arrIndex * 7 + valIndex].possibleAnswers[val] ===
-        data[arrIndex * 7 + valIndex].correctAnswer
-      )
-        sum++;
-    });
-  });
-  console.log(sum);
+
   const solvedQuestions = radio.map((arr, arrIndex) => {
     let sum = 0;
     if (arrIndex === page)
@@ -62,7 +50,7 @@ export const QuestionContainer = () => {
           })}
         </ul>
       ) : (
-        <QuestionsResult />
+        <QuestionsResult answerData={radio} questionsData={data} setDisPlayAnswer={setDisPlayAnswer} />
       )}
       <QuestionPagination
         page={page}

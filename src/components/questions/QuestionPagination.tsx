@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 export const QuestionPagination = ({
   page,
@@ -9,31 +10,37 @@ export const QuestionPagination = ({
   handlePage: (value: number) => void;
   solvedQuestions: number;
 }) => {
+  const router = useRouter();
+  const handleAgain = () => {
+    router.reload();
+  };
   const notice = `아직 ${7 - solvedQuestions}문제 남았습니다.`;
+  const noticeFirst = `첫 페이지입니다.`;
   return (
     <Container>
-      {page > 0 ? (
-        <Btn type="submit" onClick={() => handlePage(-1)}>
-          이전 문제
-        </Btn>
-      ) : (
-        <span></span>
-      )}
-      <PageNum>{page + 1} / 4</PageNum>
-      {page < 5 ? (
+      <Btn
+        type="button"
+        onClick={() => (page > 0 ? handlePage(-1) : alert(noticeFirst))}
+        data-active={page > 0}
+      >
+        이전 문제
+      </Btn>
+      {page < 4 && <PageNum>{page + 1} / 4</PageNum>}
+      {page < 4 ? (
         <Btn
-          type="submit"
-          // onClick={() =>
-          //   solvedQuestions === 7 ? handlePage(1) : alert(notice)
-          // }
-          onClick={() => handlePage(1)}
+          type="button"
+          onClick={() =>
+            solvedQuestions === 7 ? handlePage(1) : alert(notice)
+          }
           data-active={solvedQuestions === 7}
           data-page={page}
         >
           {page < 3 ? '다음 문제' : '결과 확인'}
         </Btn>
       ) : (
-        <span></span>
+        <Btn type="button" onClick={() => handleAgain()} data-again>
+          다시 풀기
+        </Btn>
       )}
     </Container>
   );
@@ -53,6 +60,7 @@ const Btn = styled.button`
   color: #fff;
   font-size: 18px;
   font-weight: 500;
+  line-height: 1.2;
   &[data-active='false'] {
     background: #f380217a;
     cursor: default;
@@ -63,6 +71,9 @@ const Btn = styled.button`
   &[data-active='false'][data-page='3'] {
     background: #9b329273;
     cursor: default;
+  }
+  &[data-again] {
+    background: #c7244a;
   }
 `;
 const PageNum = styled.p`

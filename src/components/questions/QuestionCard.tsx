@@ -47,7 +47,6 @@ export const QuestionCard = ({
           );
         })}
       </AnswerList>
-      {/* <p>Answer: {correctAnswer}</p> */}
     </li>
   );
 };
@@ -66,11 +65,9 @@ const AnswerList = styled.ul`
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: auto;
   gap: 15px;
-  /* place-items: center; */
   margin: 20px 0 40px;
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
     grid-template-columns: repeat(2, 1fr);
-    /* gap: 50px 20px; */
   }
   @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
     grid-template-columns: repeat(5, 1fr);
@@ -84,6 +81,7 @@ const AnswerBox = styled.div`
   border-radius: 10px;
   background: #eee;
   line-height: 1.3;
+  cursor: pointer;
   & div:first-of-type {
     margin-right: 6px;
   }
@@ -98,6 +96,6 @@ const AnswerBox = styled.div`
     border-radius: 10px;
   }
   &[data-answer='true'] {
-    background: #6ebc46;
+    background: #90f15f;
   }
 `;
