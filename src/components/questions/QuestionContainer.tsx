@@ -1,56 +1,78 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { QuestionCard } from './QuestionCard';
+import { useApiData } from '../../hooks';
 import { QuestionType } from '../../types';
+import { Error, Loading } from '../common';
+import styled from '@emotion/styled';
+import { QuestionPagination } from './QuestionPagination';
+import { QuestionsResult } from './QuestionsResult';
 
-interface QuestionContainerProps {
-  questionData: QuestionType[];
-  rowCount: number;
-}
-
-export const QuestionContainer = ({
-  questionData,
-  rowCount,
-}: QuestionContainerProps) => {
-  let initialPage = 0;
+export const QuestionContainer = () => {
+  const name = 'questions';
+  const { data, error } = useApiData(name);
+  const rowCount = 7;
+  const [radio, setRadio] = useState(
+    Array(Math.ceil(28 / rowCount)).fill(Array(rowCount).fill(undefined))
+  );
+  const [displayAnswer, setDisPlayAnswer] = useState(false);
   const [page, setPage] = useState(0);
-  const handlePageUp = useCallback(() => {
-    setPage((curr) => curr + 1);
+  const handlePage = (num: number) => {
+    setPage((curr) => curr + num);
     window.scrollTo(0, 0);
-  }, []);
-  const handlePageDown = useCallback(() => {
-    setPage((curr) => curr - 1);
-    window.scrollTo(0, 0);
-  }, []);
+  };
+  if (!data) return <Loading />;
+  if (error) return <Error />;
+  let sum = 0;
+  if (page > 3 && data.length) setDisPlayAnswer(() => true);
+  radio.map((arr, arrIndex) => {
+    arr.map((val: number, valIndex: number) => {
+      if (
+        data[arrIndex * 7 + valIndex].possibleAnswers[val] ===
+        data[arrIndex * 7 + valIndex].correctAnswer
+      )
+        sum++;
+    });
+  });
+  console.log(sum);
+  const solvedQuestions = radio.map((arr, arrIndex) => {
+    let sum = 0;
+    if (arrIndex === page)
+      arr.map((val: number) => {
+        if (val !== undefined) sum++;
+      });
+    return sum;
+  })[page];
+
   return (
-    <div>
-      <ul>
-        {questionData.map((episode: QuestionType, index: number) => {
-          const { id, question, possibleAnswers, correctAnswer } = episode;
-          if (index >= rowCount * page && index < rowCount * page + rowCount)
-            return (
-              <li key={`${id}st-question`}>
-                <h2>{question}</h2>
-                <ul>
-                  {possibleAnswers.map(
-                    (possibleAnswer: string, index: number) => (
-                      <li key={`${index}st-option`}>
-                        <p>
-                          {index + 1}. {possibleAnswer}
-                        </p>
-                      </li>
-                    )
-                  )}
-                </ul>
-                <p>Answer: {correctAnswer}</p>
-              </li>
-            );
-        })}
-      </ul>
-      <button type="button" onClick={handlePageDown}>
-        이전 페이지
-      </button>
-      <button type="button" onClick={handlePageUp}>
-        다음 페이지
-      </button>
-    </div>
+    <Container>
+      {page < 4 ? (
+        <ul>
+          {data.map((questionData: QuestionType, index: number) => {
+            if (index >= rowCount * page && index < rowCount * page + rowCount)
+              return (
+                <QuestionCard
+                  key={`${index}-question`}
+                  questionData={questionData}
+                  index={index}
+                  setRadio={setRadio}
+                  radio={radio}
+                  displayAnswer={displayAnswer}
+                />
+              );
+          })}
+        </ul>
+      ) : (
+        <QuestionsResult />
+      )}
+      <QuestionPagination
+        page={page}
+        handlePage={handlePage}
+        solvedQuestions={solvedQuestions}
+      />
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin: 20px 10px 50px;
+`;

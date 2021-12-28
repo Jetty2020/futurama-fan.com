@@ -71,7 +71,7 @@ export const Pagination = ({
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin: 50px auto;
+  margin: 50px 0;
 `;
 const BtnCon = styled.div`
   display: flex;
