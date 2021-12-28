@@ -1,9 +1,10 @@
 import type { NextPage } from 'next'
+import { LandingContainer } from '../components/landing'
 
 const Home: NextPage = () => {
   return (
     <div>
-      index
+      <LandingContainer />
     </div>
   )
 }
