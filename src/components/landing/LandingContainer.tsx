@@ -6,7 +6,9 @@ export const LandingContainer = () => {
     <Container>
       <LandingTitle>Enjoy your Futurama</LandingTitle>
       <LandingImg src="/landing.jpg" alt="" />
-      <LandingMobileP>퓨처라마를 즐기기위한 웹사이트 입니다.</LandingMobileP>
+      <LandingMobileP>
+        “Oh Wait, You’re Serious. Let Me Laugh Even Harder.” – Bender
+      </LandingMobileP>
     </Container>
   );
 };
@@ -16,27 +18,32 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 70px);
-  /* background: pink; */
+  min-height: calc(100vh - 70px);
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
-    height: calc(100vh - 108px);
+    min-height: calc(100vh - 108px);
   }
   @media (min-width: ${MEDIA_QUERY_END_POINT.LAPTOP}) {
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
   }
 `;
 const LandingTitle = styled.h2`
-  margin: -60px 0 40px;
+  margin-top: -40px;
   font-size: 40px;
   font-weight: 700;
+  text-align: center;
 `;
 const LandingImg = styled.img`
-  width: 100%;
+  max-width: 100%;
+  margin-top: 40px;
+  @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
+    max-height: 60vh;
+  }
 `;
 const LandingMobileP = styled.p`
   margin: 50px 0 -50px;
   font-size: 20px;
   font-weight: 700;
+  text-align: center;
   @media (min-width: ${MEDIA_QUERY_END_POINT.TABLET}) {
     display: none;
   }
